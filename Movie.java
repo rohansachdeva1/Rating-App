@@ -1,44 +1,56 @@
 import java.util.*;
+//import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class Movie {
 
-    private int id;
-    private double finalRating;
-    public static Map<String,Double> ratingsMap;
+    private String id; // unique movie id from IMDB API
+    private double finalRating; // user's final rating 
+    public Map<String,Double> categoryRatings; // stores which categories were used to make the final rating
 
     // default constructor
     public Movie() {
-        this.id = -1;
+        this.id = "";
         this.finalRating = -1;
-        categoryMap = new HashMap<>();
+        this.categoryRatings = new HashMap<>();
     }
 
     // main constructor
     public Movie(String inputId) {
         this.id = inputId;
         this.finalRating = -1;
-        ratingsMap = new HashMap<>();
+        this.categoryRatings = new HashMap<>();
     }
 
-    public void addRating(String categoryName, Double userRating) {
-        this.ratingsMap.put(categoryName, userRating);
+    // Add to the movie object's hashmap of categories, input a category and the cooresponding rating
+    public void addRating(String categoryName, Double inputRating) {
+        this.categoryRatings.put(categoryName, inputRating);
     }
 
-    // rating setter and getter
-    public void setFinalRating(double inputR) {
-        this.rating = inputR;
+    // Set the movie object's overall rating
+    public void setFinalRating(double inputRating) {
+        this.finalRating = inputRating;
     }
+    // get the movie objects overall rating
     public double getFinalRating() {
-        return this.rating;
+        return this.finalRating;
     }
 
     public String toString() {
         StringBuilder result = new StringBuilder();
-        //result.append(this.name + "\n");
-        //result.append(this.year + "\n");
-        result.append("Overall Rating:" + this.rating);
+        APIHandler APIHandlerInstance = new APIHandler();
+        String title = parse(APIHandlerInstance.searchMovieById(this.id));
 
+        result.append(title + "\n" + "Rating: " + this.finalRating);
         return result.toString();
+    }
+
+    // API call returns a JSON object of the movie's data, parse through that and return what toString needs
+    public static String parse (JSONObject responseBody) {
+        JSONObject searchResults = responseBody;
+        String fullTitle = searchResults.getString("fullTitle");
+
+        return fullTitle;
     }
 
 }

@@ -1,4 +1,4 @@
-import java.util.*;
+// import java.util.*;
 
 public class Category {
 
@@ -57,9 +57,10 @@ public class Category {
 
     public String toString() {
         StringBuilder result = new StringBuilder();
+        /*
         if (this.description != null) {
             result.append(this.description + "\n");
-        }
+        } */
         result.append(this.question);
 
         return result.toString();

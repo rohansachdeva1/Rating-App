@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.*;
 //import java.util.LinkedList;
 
@@ -14,6 +8,7 @@ public class Database {
     public Database() {
         categoryMap = new HashMap<>();
         int categoryCount = 0;
+        numUsers = 0;
 
         Category plot = new Category("Plot", "Rate the overall plot and storyline:");
         plot.setDescription("Plot is the way the narrative is organized to tell a story.");
@@ -93,6 +88,79 @@ public class Database {
         return this.categoryMap;
     }
 
+    // normal/standard account has limited categories to rate and provides users with descriptions when available
+    public void initializeTestAccount(User inputUser) {
+
+        inputUser.actionMultipliers.clear();
+        inputUser.comedyMultipliers.clear();
+        inputUser.dramaMultipliers.clear();
+
+        // Create action multipliers hashmap to store category name (key) and multiplier value 
+        inputUser.actionMultipliers.put("Plot", 2.5);
+        inputUser.actionMultipliers.put("Acting", 0.0);
+        inputUser.actionMultipliers.put("Protagonist", 0.0);
+        inputUser.actionMultipliers.put("Antagonist", 0.0);
+        inputUser.actionMultipliers.put("Side Characters", 0.0);
+        inputUser.actionMultipliers.put("Beginning", 0.0); // pro
+        inputUser.actionMultipliers.put("Ending", 0.0); // pro
+        inputUser.actionMultipliers.put("Cinematography", 0.0); // pro
+        inputUser.actionMultipliers.put("Soundtrack", 0.0);
+        inputUser.actionMultipliers.put("Dialogue", 0.0);
+        inputUser.actionMultipliers.put("Character Development", 0.0); // pro
+        inputUser.actionMultipliers.put("Character Complexity", 0.0); // pro
+        inputUser.actionMultipliers.put("Entertainment Value", 0.0);
+        inputUser.actionMultipliers.put("Emotion", 0.0); // pro
+        inputUser.actionMultipliers.put("Pacing", 0.0); // pro
+        inputUser.actionMultipliers.put("Logic", 0.0); // pro
+        inputUser.actionMultipliers.put("World Building", 0.0); // pro
+        inputUser.actionMultipliers.put("Humor", 0.0); 
+        inputUser.actionMultipliers.put("Rewatchability", 0.0); // pro
+        
+        // Create comedy multipliers hashmap to store category name (key) and multiplier value 
+        inputUser.comedyMultipliers.put("Plot", 0.6);
+        inputUser.comedyMultipliers.put("Acting", 0.0);
+        inputUser.comedyMultipliers.put("Protagonist", 0.0);
+        inputUser.comedyMultipliers.put("Antagonist", 0.0);
+        inputUser.comedyMultipliers.put("Side Characters", 0.0);
+        inputUser.comedyMultipliers.put("Beginning", 0.0); // pro
+        inputUser.comedyMultipliers.put("Ending", 0.0); // pro
+        inputUser.comedyMultipliers.put("Cinematography", 0.0); // pro
+        inputUser.comedyMultipliers.put("Soundtrack", 0.0);
+        inputUser.comedyMultipliers.put("Dialogue", 0.0);
+        inputUser.comedyMultipliers.put("Character Development", 0.0);
+        inputUser.comedyMultipliers.put("Character Complexity", 0.0); // pro
+        inputUser.comedyMultipliers.put("Entertainment Value", 0.0);
+        inputUser.comedyMultipliers.put("Emotion", 0.0);
+        inputUser.comedyMultipliers.put("Pacing", 0.0);
+        inputUser.comedyMultipliers.put("Logic", 0.0);
+        inputUser.comedyMultipliers.put("World Building", 0.0);
+        inputUser.comedyMultipliers.put("Humor", 0.0);
+        inputUser.comedyMultipliers.put("Rewatchability", 0.0);
+
+        // Create drama  multipliers hashmap to store category name (key) and multiplier value 
+        inputUser.dramaMultipliers.put("Plot", 1.0);
+        inputUser.dramaMultipliers.put("Acting", 0.0);
+        inputUser.dramaMultipliers.put("Protagonist", 0.0);
+        inputUser.dramaMultipliers.put("Antagonist", 0.0);
+        inputUser.dramaMultipliers.put("Side Characters", 0.0);
+        inputUser.dramaMultipliers.put("Beginning", 0.0); // pro
+        inputUser.dramaMultipliers.put("Ending", 0.0); // pro
+        inputUser.dramaMultipliers.put("Cinematography", 0.0); // pro
+        inputUser.dramaMultipliers.put("Soundtrack", 0.0); // pro
+        inputUser.dramaMultipliers.put("Dialogue", 0.0);
+        inputUser.dramaMultipliers.put("Character Development", 0.0); // pro
+        inputUser.dramaMultipliers.put("Character Complexity", 0.0);
+        inputUser.dramaMultipliers.put("Entertainment Value", 0.0);
+        inputUser.dramaMultipliers.put("Emotion", 0.0);
+        inputUser.dramaMultipliers.put("Pacing", 0.0); // pro
+        inputUser.dramaMultipliers.put("Logic", 0.0); // pro
+        inputUser.dramaMultipliers.put("World Building", 0.0);
+        inputUser.dramaMultipliers.put("Humor", 0.0);
+        inputUser.dramaMultipliers.put("Rewatchability", 0.0);
+
+}
+
+    // normal/standard account has limited categories to rate and provides users with descriptions when available
     public void initializeNormalAccount(User inputUser) {
 
             inputUser.actionMultipliers.clear();
@@ -164,6 +232,8 @@ public class Database {
 
     }
 
+
+    // Pro account opens all categories and does not provide the user with descriptions
     public void initializeProAccount(User inputUser) {
         
             inputUser.actionMultipliers.clear();
@@ -233,6 +303,11 @@ public class Database {
             inputUser.dramaMultipliers.put("Humor", 0.3);
             inputUser.dramaMultipliers.put("Rewatchability", 0.8);
 
+    }
+
+    public int getNumUsers() {
+        this.numUsers++;
+        return this.numUsers;
     }
 
 }
